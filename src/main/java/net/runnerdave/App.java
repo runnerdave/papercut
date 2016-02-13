@@ -13,8 +13,12 @@ public class App {
 	private final static ResourceBundle myResources = ResourceBundle.getBundle("ResourceBundle");
 
 	public static void main(String[] args) {
+		
+		System.out.println(myResources.getString("app.initial.message"));
 
 		PrintJobsReader reader = new PrintJobsReader(myResources.getString("print.jobs.file.name"));
+		
+		System.out.println(myResources.getString("app.log.information.message"));
 
 		Map<Integer, Context> maps = reader.readFileIntoMap();
 		
@@ -29,12 +33,12 @@ public class App {
 			Context job = (Context) entry.getValue();
 			System.out.println(new StringBuilder("Job number ").append(entry.getKey()).append(":"));
 			System.out.println(job.getDetails());
-			System.out.println(new StringBuilder("Cost: ").append(job.executeStrategy()));
+			System.out.println(new StringBuilder("Cost: $").append(job.executeStrategy()));
 			System.out.println();
 			totalCost = totalCost.add(job.executeStrategy());
 		}
 		
-		System.out.println(new StringBuilder("Total cost: ").append(totalCost));
+		System.out.println(new StringBuilder("Total cost: $").append(totalCost));
 
 	}
 

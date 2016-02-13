@@ -20,3 +20,16 @@ The application should:
   * Output the job details and job cost for each job to the console
   * Output the total cost of all jobs
   
+#Solution
+  Implementation of Strategies to print different types of A4 size paper depending on prices for each kind.
+  
+  Does not allow to print a one page as double side, it defaults to single side.
+  
+  To extend the solution to other classes add extend abstract _PrintJob_ class and include logic in method _assignStrategy()_ in _PrintJobsReader_.
+  
+#Build
+  With maven installed simply run: _mvn clean package_
+  
+#Run
+  run the following command: _ java -jar target/papercut-jar-with-dependencies.jar_
+  
