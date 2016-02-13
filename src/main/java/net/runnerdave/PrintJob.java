@@ -20,9 +20,10 @@ public abstract class PrintJob {
 	private int numberOfColourPages;
 	private int numberOfBlackAndWhitePages;
 	
-	public PrintJob(int inNumberOfColourPages, int inNumberOfBlackAndWhitePages) {
+	public PrintJob(int inNumberOfColourPages, int inNumberOfBlackAndWhitePages, boolean inIsDoubleSided) {
 		this.numberOfColourPages = inNumberOfColourPages;
 		this.numberOfBlackAndWhitePages = inNumberOfBlackAndWhitePages;
+		this.isDoubleSided = inIsDoubleSided;
 	}
 	
 	abstract BigDecimal calculatePrice();
@@ -65,6 +66,12 @@ public abstract class PrintJob {
 
 	public void setNumberOfBlackAndWhitePages(int numberOfBlackAndWhitePages) {
 		this.numberOfBlackAndWhitePages = numberOfBlackAndWhitePages;
+	}
+
+	@Override
+	public String toString() {
+		return "PrintJob [isDoubleSided=" + isDoubleSided + ", numberOfColourPages=" + numberOfColourPages
+				+ ", numberOfBlackAndWhitePages=" + numberOfBlackAndWhitePages + "]";
 	}
 
 }
