@@ -25,11 +25,11 @@ The application should:
   
   Does not allow to print a one page as double side, it defaults to single side.
   
-  To extend the solution to other classes add extend abstract _PrintJob_ class and include logic in method _assignStrategy()_ in _PrintJobsReader_.
+  To extend the solution to other classes add extend _abstract_ __PrintJob__ class and include logic in method __assignStrategy()__ in __PrintJobsReader__.
   
 #Build
-  With maven installed simply run: _mvn clean package_
+  With maven installed simply run: __mvn clean package__
   
 #Run
-  run the following command: _ java -jar target/papercut-jar-with-dependencies.jar_
+  run the following command: __java -jar target/papercut-jar-with-dependencies.jar__
   
