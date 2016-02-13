@@ -18,6 +18,9 @@ public class A4SingleSided extends PrintJob {
 		super(inNumberOfColourPages, inNumberOfBlackAndWhitePages, false);
 		super.setColourPagesPrice(new BigDecimal(Double.valueOf(myResources.getString("a4.single.sided.colour.page.price"))));
 		super.setBlackAndWhitePagesPrice(new BigDecimal(Double.valueOf(myResources.getString("a4.single.sided.black.and.white.page.price"))));
+		setNumberOfBlackAndWhitePages(getTotalNumberOfPages()-getNumberOfColourPages());
 	}
+
+	
 
 }

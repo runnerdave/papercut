@@ -19,10 +19,11 @@ public abstract class PrintJob {
 	
 	private int numberOfColourPages;
 	private int numberOfBlackAndWhitePages;
+	private int totalNumberOfPages;
 	
-	public PrintJob(int inNumberOfColourPages, int inNumberOfBlackAndWhitePages, boolean inIsDoubleSided) {
+	public PrintJob(int inTotalNumberOfPages, int inNumberOfColourPages, boolean inIsDoubleSided) {
 		this.numberOfColourPages = inNumberOfColourPages;
-		this.numberOfBlackAndWhitePages = inNumberOfBlackAndWhitePages;
+		this.totalNumberOfPages = inTotalNumberOfPages;
 		this.isDoubleSided = inIsDoubleSided;
 	}
 	
@@ -68,10 +69,23 @@ public abstract class PrintJob {
 		this.numberOfBlackAndWhitePages = numberOfBlackAndWhitePages;
 	}
 
-	@Override
-	public String toString() {
-		return "PrintJob [isDoubleSided=" + isDoubleSided + ", numberOfColourPages=" + numberOfColourPages
-				+ ", numberOfBlackAndWhitePages=" + numberOfBlackAndWhitePages + "]";
+	public int getTotalNumberOfPages() {
+		return totalNumberOfPages;
+	}
+
+	public void setTotalNumberOfPages(int totalNumberOfPages) {
+		this.totalNumberOfPages = totalNumberOfPages;
+	}
+
+	public String getDetails() {
+		StringBuilder details = new StringBuilder("Job details: ");
+		
+		details.append(isDoubleSided ? "Double sided" : "Single sided");
+		details.append(", total number of pages: ").append(totalNumberOfPages);
+		details.append(", number of colour pages: ").append(numberOfColourPages);
+		details.append(", number of black and white pages: ").append(numberOfBlackAndWhitePages);
+		
+		return details.toString();
 	}
 
 }

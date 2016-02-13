@@ -9,6 +9,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Reads content of csv file into map.
+ * 
+ * @author runnerdave
+ *
+ */
 public class PrintJobsReader {
 
 	final static Logger logger = Logger.getLogger(PrintJobsReader.class);
@@ -17,14 +23,13 @@ public class PrintJobsReader {
 
 	public PrintJobsReader(String inFileLocation) {
 		this.fileLocation = inFileLocation;
-		System.out.println(fileLocation);
-		logger.info("holas");
+		System.out.println(new StringBuilder("Reading jobs from: ").append(fileLocation));
 	}
 
-	public Map<Integer, PrintJob> readFileIntoMap() {
+	public Map<Integer, Context> readFileIntoMap() {
 		BufferedReader br = null;
 		String line = "";
-		Map<Integer, PrintJob> maps = new HashMap<Integer, PrintJob>();
+		Map<Integer, Context> maps = new HashMap<Integer, Context>();
 
 		try {
 			int validJobIndex = 0;
@@ -36,25 +41,13 @@ public class PrintJobsReader {
 				String[] job = line.split("\\s*,\\s*");
 
 				i++;
-				if (validateLine(job)) {
-					PrintJob printJob;
+				if (validateLine(job)) {					
 					validJobIndex++;
-					if (Boolean.parseBoolean(job[2])) {
-						printJob = new A4DoubleSided(Integer.parseInt(job[0]), Integer.parseInt(job[1]));
-					} else {
-						printJob = new A4SingleSided(Integer.parseInt(job[0]), Integer.parseInt(job[1]));
-					}
+					Context printJob = assignStrategy(Integer.parseInt(job[0]), Integer.parseInt(job[1]), Boolean.parseBoolean(job[2]));					
 					maps.put(new Integer(validJobIndex), printJob);
 				} else {
 					logger.info(new StringBuilder("Invalid job in line: ").append(i));
 				}
-
-			}
-
-			// loop map
-			for (Map.Entry<Integer, PrintJob> entry : maps.entrySet()) {
-
-				logger.debug(("Job [index= " + entry.getKey() + " , job=" + entry.toString() + "]"));
 
 			}
 
@@ -73,26 +66,71 @@ public class PrintJobsReader {
 		}
 		return maps;
 	}
+	
+	/**
+	 * Assign strategy to use.
+	 * @param totalPages
+	 * @param colourPages
+	 * @param isDoubleSided
+	 * @return the strategy instantiated.
+	 */
+	private Context assignStrategy(int totalPages, int colourPages, boolean isDoubleSided) {
+		//assign single sided by default
+		Context printJob = new Context(new A4SingleSided(totalPages, colourPages));
+		
+		//prevent charging one page as a double sided
+		if (isDoubleSided && (totalPages > 1)) {
+			printJob = new Context(new A4DoubleSided(totalPages, colourPages));
+		}
+		
+		return printJob;
+	}
 
+	/**
+	 * Total number has to be higher or equal to number of colour pages. Line
+	 * has to have 3 elements. First and second elements have to be integers.
+	 * Last element has to be parseable as boolean.
+	 * 
+	 * @param line
+	 * @return boolean
+	 */
 	private boolean validateLine(String[] line) {
 		boolean isValid = false;
 
-		if (line.length == 3 && isInteger(line[0]) && isInteger(line[1]) && isBoolean(line[2])) {
+		if (line.length == 3 && isPositiveInteger(line[0]) && isPositiveInteger(line[1]) && isBoolean(line[2])
+				&& (Integer.parseInt(line[0]) >= Integer.parseInt(line[1]))) {
 			isValid = true;
 		}
 
 		return isValid;
 	}
 
-	private boolean isInteger(String str) {
+	/**
+	 * test if positive integer
+	 * 
+	 * @param str
+	 * @return true if value is integer and positive
+	 */
+	private boolean isPositiveInteger(String str) {
 		try {
-			Integer.parseInt(str);
-			return true;
+			int i = Integer.parseInt(str);
+			if (i >= 0) {
+				return true;
+			} else {
+				return false;
+			}
+			
 		} catch (NumberFormatException nfe) {
 			return false;
 		}
 	}
 
+	/**
+	 * test if parseable as boolean.
+	 * 
+	 * @param str
+	 * @return true is value is parseable as boolean.
+	 */
 	private boolean isBoolean(String str) {
 		try {
 			Boolean.parseBoolean(str);
