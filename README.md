@@ -25,7 +25,11 @@ The application should:
   
   Does not allow to print a one page as double side, it defaults to single side.
   
-  To extend the solution to other classes add extend _abstract_ __PrintJob__ class and include logic in method __assignStrategy()__ in __PrintJobsReader__.
+  To extend the solution to other sizes add classes by extending _abstract_ __PrintJob__ class and include logic in methods __assignStrategy()__ and __validateLine(line)__ in __PrintJobsReader__ .
+  
+  The solution can be improved by making the __assignStrategy()__ read and implement classes using
+the ConfigLoader class that reads properties from the file config.properties however this is not
+implemented in this version of the program. 
   
 #Build
   With maven installed simply run: __mvn clean package__
