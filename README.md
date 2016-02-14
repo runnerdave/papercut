@@ -1,7 +1,7 @@
 
 
 #Problem description
-To reduce printing waste, a school is implementing PaperCut and will charge for printing as follows:
+To reduce printing waste, a school is implementing a printing solution and will charge for printing as follows:
 
 Paper size A4, job type single sided:
   * 15 cents per black and white page
@@ -35,5 +35,5 @@ implemented in this version of the program due to time constraints.
   With maven installed simply run: __mvn clean package__
   
 #Run
-  run the following command: __java -jar target/papercut-jar-with-dependencies.jar__
+  run the following command: __java -jar target/printing-strategy-jar-with-dependencies.jar__
   
