@@ -75,7 +75,6 @@ public class PrintJobsReader {
 	 * @return the strategy instantiated.
 	 */
 	private Context assignStrategy(int totalPages, int colourPages, boolean isDoubleSided) {
-		//TODO: select the classes using ConfigLoader class
 		//assign single sided by default
 		Context printJob = new Context(new A4SingleSided(totalPages, colourPages));
 		

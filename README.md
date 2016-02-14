@@ -29,7 +29,7 @@ The application should:
   
   The solution can be improved by making the __assignStrategy()__ read and implement classes using
 the ConfigLoader class that reads properties from the file config.properties however this is not
-implemented in this version of the program. 
+implemented in this version of the program due to time constraints. 
   
 #Build
   With maven installed simply run: __mvn clean package__
