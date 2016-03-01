@@ -13,7 +13,7 @@ Paper size A4, job type double sided:
 
 Support for other paper sizes will be added in the future.  
 
-Write a program in Java that takes a list of A4 print jobs and calculates the cost of each job, given the total number of pages, number of colour pages and whether printing is double sided. holas.  
+Write a program in Java that takes a list of A4 print jobs and calculates the cost of each job, given the total number of pages, number of colour pages and whether printing is double sided.  
 
 The application should:
   * Read print jobs from a file (see attached file for an example.)
